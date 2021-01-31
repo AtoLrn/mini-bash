@@ -57,11 +57,14 @@ void execProg() {
     {
         return;
     } else if (pid == 0) {
-        printf("enfant");
+        int ret = execvp(elements[0],elements);
+        if (ret == -1) printf("Unknown command :( \n");
+        //printf("enfant");
+        exit(1);
     } else {
         int status;
         wait(&status);
-        printf("parents");
+        //printf("parents");
     }
 }
 
@@ -72,52 +75,6 @@ int main(void) {
         if(waitInput()) break;
         execProg();
     }
-
+    printf("Bye :(");
     return EXIT_SUCCESS;
 }
-
-
-//void executionPrgm()
-//{
-//    pid_t pid;
-//    struct sigaction sig;
-//
-//    // Si l'utilisateur ne saisie rien
-//    if(!elements[0]) {
-//        printf("no");
-//        return;
-//    }
-//
-//
-//    // Désactive l'interruption par Ctrl+c
-//    sig.sa_flags = 0;
-//    sig.sa_handler = SIG_IGN;
-//    sigaction(SIGINT, &sig, NULL);
-//
-//    pid = fork();
-//    if(pid < 0)
-//    {
-//        // La création de processus à échoué
-//        return;
-//    }
-//
-//    if(pid==0)
-//    {
-//        // Réactive l'interruption par Ctrl+c
-//        sig.sa_handler = SIG_DFL;
-//        sigaction(SIGINT, &sig, NULL);
-//
-//        // Lancement de l'exécution du programme
-//        execvp(elements[0],elements);
-//
-//        // Affichage en cas d'echec
-//        //printf("Impossible d'executer %s %s\n",elements[0],strerror(errno));
-//        //exit(1);
-//    }
-//    else
-//    {
-//        int status;
-//        wait(&status);
-//        //return;
-//    }
-//}

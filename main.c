@@ -49,6 +49,7 @@ int waitInput () {
 }
 
 void execProg() {
+    int pipe[2];
     pid_t pid;
 
     pid = fork();

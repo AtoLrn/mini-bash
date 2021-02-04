@@ -7,6 +7,11 @@
 #include <errno.h>
 #include <string.h>
 
+
+#define KCYN  "\x1B[36m"
+#define KGRN  "\x1B[32m"
+#define RESET "\x1B[0m"
+
 void execProg();
 int waitInput ();
 void trim(char * str);
@@ -27,7 +32,7 @@ void trim(char * str) {
 }
 
 void askInput () {
-    printf("Cmd=> ");
+    printf("%sCmd=> %s", KCYN, RESET);
     fflush(stdout);
 }
 
